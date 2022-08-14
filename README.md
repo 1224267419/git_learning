@@ -7,7 +7,7 @@
 
 - [ ] 《每天5分钟玩转Docker容器技术》 - CloudMan
 - [ ] 《Kubernetes in Action》- Marko Luksa
- 
+
 ## Add your files
 
 记住，笔记不是必须的东西，但是要有方法的吸收/学习内容！
@@ -18,15 +18,21 @@
 2. [kubernetes 学习路径](https://www.infoq.cn/article/9DTX*1i1Z8hsxkdrPmhk)
 3. [kubernetes 官方tutorial](https://kubernetes.io/zh-cn/docs/tutorials/kubernetes-basics/)
 
-
 ## 其他git指南 
 
+请记得先：`git clone https://gitlab.com/uooou/docker-path.git`。
+
+```cmd
+cd docker-path
+
+git checkout -b "your-study-branch"
+
+hack, hack, hack
+
+git push origin "your-study-branch"
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/uooou/docker-path.git
-git branch -M main
-git push -uf origin main
-```
+
+在上传你的分支以后，再进行分支合并。
 
 ### Integrate with your tools
 
