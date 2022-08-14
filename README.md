@@ -1,17 +1,25 @@
 # Docker Path
 
 
-
 ## Getting started
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+这个project的意义在于：利用Git管理工具来记录学习docker路线上的记录，笔记，分享学习进度等等。目前计划的书目有
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
+- [ ] 《每天5分钟玩转Docker容器技术》 - CloudMan
+- [ ] 《Kubernetes in Action》- Marko Luksa
+ 
 ## Add your files
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+记住，笔记不是必须的东西，但是要有方法的吸收/学习内容！
+
+## Other resources
+
+1. [kubernetes 指南](https://kubernetes.feisky.xyz/)
+2. [kubernetes 学习路径](https://www.infoq.cn/article/9DTX*1i1Z8hsxkdrPmhk)
+3. [kubernetes 官方tutorial](https://kubernetes.io/zh-cn/docs/tutorials/kubernetes-basics/)
+
+
+## 其他git指南 
 
 ```
 cd existing_repo
@@ -20,11 +28,11 @@ git branch -M main
 git push -uf origin main
 ```
 
-## Integrate with your tools
+### Integrate with your tools
 
 - [ ] [Set up project integrations](https://gitlab.com/uooou/docker-path/-/settings/integrations)
 
-## Collaborate with your team
+### Collaborate with your team
 
 - [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
 - [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
@@ -32,7 +40,7 @@ git push -uf origin main
 - [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
 - [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
 
-## Test and Deploy
+### Test and Deploy
 
 Use the built-in continuous integration in GitLab.
 
