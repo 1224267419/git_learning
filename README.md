@@ -34,7 +34,10 @@ git push origin "your-study-branch"
 
 在上传你的分支以后，再进行分支合并。
 
-可以在这里练习git：https://learngitbranching.js.org/?locale=zh_CN
+关于git，一些有用的东西：
+1. 可以在这里练习git：https://learngitbranching.js.org/?locale=zh_CN
+2. 计算机教育缺失的一课(这里只说git，但其他内容也值得一看)：https://missing-semester-cn.github.io/2020/version-control/
+3. 15分钟Git：https://www.youtube.com/watch?v=USjZcfj8yxE
 
 ### Integrate with your tools
 
