@@ -34,6 +34,8 @@ git push origin "your-study-branch"
 
 在上传你的分支以后，再进行分支合并。
 
+可以在这里练习git：https://learngitbranching.js.org/?locale=zh_CN
+
 ### Integrate with your tools
 
 - [ ] [Set up project integrations](https://gitlab.com/uooou/docker-path/-/settings/integrations)
