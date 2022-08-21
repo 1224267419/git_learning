@@ -4,7 +4,7 @@
 
 容器与VM都是封装，隔离。区别在于：
 
-<img src="\docker_notes.assets\1659102918291.png" alt="1659102918291" style="zoom: 50%;" />
+<img src="docker_notes.assets\1659102918291.png" alt="1659102918291" style="zoom: 50%;" />
 
 带来什么好处：
 
@@ -13,7 +13,7 @@
 
 ## 架构详解
 
-![1659103320349](\docker_notes.assets\1659103320349.png)
+![1659103320349](docker_notes.assets\1659103320349.png)
 
 核心组件：
 
@@ -47,7 +47,7 @@ docker ps		# 显示正在运行的容器
 
 然后在base之上我们可以构建更多的镜像，每安装一个软件，就在镜像上再增加一层。这样带来的一个好处就是**共享资源**。
 
-![1659384064749](\docker_notes.assets\1659384064749.png)
+![1659384064749](docker_notes.assets\1659384064749.png)
 
 ### 容器层
 
@@ -111,7 +111,7 @@ docker build -t new-image-name .
 | ADD src dest  | 同上，但若src是压缩文件，会自动解压到dest                    |
 | ENV           | 设置环境变量                                                 |
 | EXPOSE        | 暴露某个端口                                                 |
-| VOLUMN        | -                                                            |
+| VOLUMN        | 详情看*存储章节*                                             |
 | WORKDIR       | 为此后的RUN, CMD, ADD, COPY, ENTRYPOINT设置工作目录          |
 | RUN           | 在容器中运行指定指令                                         |
 | CMD           | 容器启动时默认运行指定的命令（可有多个，但只有最后一个有效） |
@@ -271,7 +271,7 @@ Docker安装时自动创建的三个网络：none, host, bridge（可通过`dock
 
 
 
-在操作后可通过 `brctl show` 查看 host 的网络结构。也可以通过 `docker network inspect [net_name]`  来查看对应网络的配置信息
+在操作后可通过 `brctl show` 查看 host 的网络结构。也可以通过 `docker network inspect [net_name]`  来查看对应docker配置信息（当然也包括网络）
 
 ##  user-defined 网络
 
@@ -319,5 +319,77 @@ storage driver有多种。默认使用的是Linux发行版默认的storage drive
 
 ## Data volume
 
-data volume 实际上是
+data volume 实际上是 docker host 文件系统中的目录，只不过被 mount 到容器的文件系统中。
 
+那我们怎么在 storage 和 volume 之间做选择呢？很简单，无状态的软件在容器层，而持久化数据放在volume里。比如：
+
+- 数据库软件 vs 数据
+- Web应用 vs 日志
+- Apache Server vs HTML文件
+
+有两种方法做volume：
+
+1. **bind mount**
+
+在运行docker容器的时候，加上`-v`指定mount的地址以及权限。
+
+例子：`docker run -d -v <host path>:<container path>:[permission] <container name>`
+
+2. **docker managed volume**
+
+跟 **bind mount** 很相似。只是这次不指定`<host path>`，直接指定`<container path>`。
+
+这是可以通过`docker inspect`来查看他给我们定义的mount source在哪里：
+
+每当申请mount volume的时候，docker自动在/var/lib/docker/volumes生成一个目录作为mount源，且这个mount源会与`<container path>`的内容完全一致（如果`<container path>`存在的话）
+
+## 数据共享
+
+### 容器与host共享
+
+除了volume的方式以外，可以通过`docker cp`的方式将host的文件拷贝到volume里。
+
+### 容器之间共享
+
+方法有三种：
+
+1. 将要共享的数据一同放进对应容器们的bind mount中。
+2. **volume container**
+
+首先创建volume container`docker create <vc name> -v <path1> -v <path2> ... `
+
+然后之后的容器运行时全部通过`--volumes-from <vc name>`来直接共享volume container的mount。
+
+3. **data-packed volume container**
+
+该方法将数据完全打包到 volume container 的镜像中，然后通过docker managed volume共享。
+
+Dockerfile中，加上以下两距
+
+```dockerfile
+ADD <host source path> <container dest path>
+VOLUME <container dest path>
+```
+
+然后构建新镜像，以新镜像来运行volume container。此后再让别的容器`--volumes-from`它即可。
+
+## Volume的生命周期
+
+> 关于备份、恢复、迁移、销毁。
+
+### 备份与恢复
+
+**备份**：定期将本地镜像存在host的本地registry中
+
+**恢复**：取出来，拷贝进去即可
+
+### 迁移
+
+如果我们要使用更新的Registry，却不改变volume的情况，则需
+
+- `docker stop`停止使用当前Registry容器
+- 启动新版本容器并让他mount到原有的volume上
+
+### 删除
+
+在删除容器时加上`-v`即可。但如果没有加就会产生孤儿 volume，可以通过`docker volume ls`来查看以及`docker volume rm`来删除
