@@ -28,7 +28,39 @@
 - Registry
   - 镜像仓库
 
-## 运行试试
+## 安装、运行试试
+
+主机上安装docker host的步骤有：
+
+- 安装HTTPS CA证书
+
+  ```bash
+  $ sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+  ```
+
+- 添加GPG key
+
+  ```bash
+  $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  ```
+
+- 添加Docker的apt源
+
+  ```bash
+  $ sudo add-apt-repository \
+    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) \
+    stable"
+  ```
+
+- 安装docker
+
+  ```bash
+  $ sudo apt-get update
+  $ sudo apt-get install docker-ce
+  ```
+
+运行试试：
 
 ```
 docker run -d -p 80:80 httpd	# 部署httpd容器（若没有则自动从DockerHub下载镜像）
@@ -393,3 +425,10 @@ VOLUME <container dest path>
 ### 删除
 
 在删除容器时加上`-v`即可。但如果没有加就会产生孤儿 volume，可以通过`docker volume ls`来查看以及`docker volume rm`来删除
+
+# 多主机管理
+
+## Docker Machine 安装与创建
+
+- 
+
