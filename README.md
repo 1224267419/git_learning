@@ -39,6 +39,19 @@ git push origin "your-study-branch"
 2. 计算机教育缺失的一课(这里只说git，但其他内容也值得一看)：https://missing-semester-cn.github.io/2020/version-control/
 3. 15分钟Git：https://www.youtube.com/watch?v=USjZcfj8yxE
 
+<<<<<<< HEAD
+=======
+4. 1
+
+5. 2
+
+6. 3
+
+   
+
+   
+
+>>>>>>> 4e83018 (3)
 ### Integrate with your tools
 
 - [ ] [Set up project integrations](https://gitlab.com/uooou/docker-path/-/settings/integrations)
